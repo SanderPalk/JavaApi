@@ -1,0 +1,23 @@
+13:50:30.269 [main] INFO  PhotosApiApplication - Starting PhotosApiApplication using Java 19.0.1 with PID 11204 (C:\Users\Sander\Desktop\photosApi\target\classes started by Sander in C:\Users\Sander\Desktop\photosApi)
+13:50:30.278 [main] INFO  PhotosApiApplication - No active profile set, falling back to 1 default profile: "default"
+13:50:36.214 [main] INFO  PhotosApiApplication - Started PhotosApiApplication in 6.484 seconds (process running for 7.845)
+13:50:46.512 [http-nio-8080-exec-2] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
+13:52:02.176 [http-nio-8080-exec-4] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
+13:52:53.033 [http-nio-8080-exec-7] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=POST Body={id=1, albumId=null, title='null', url='null', thumbnailUrl='null'}
+13:53:05.986 [http-nio-8080-exec-8] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=POST Body={id=2, albumId=0, title='string', url='string', thumbnailUrl='string'}
+13:53:16.470 [http-nio-8080-exec-9] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
+13:54:03.363 [http-nio-8080-exec-1] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=POST Body={id=3, albumId=0, title='test', url='string', thumbnailUrl='string'}
+13:54:06.594 [http-nio-8080-exec-2] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
+13:54:51.892 [http-nio-8080-exec-4] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=DELETE ObjectId=1
+13:55:22.496 [http-nio-8080-exec-6] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=DELETE ObjectId=2
+13:55:26.554 [http-nio-8080-exec-7] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=DELETE ObjectId=3
+13:55:28.536 [http-nio-8080-exec-8] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
+13:58:06.568 [http-nio-8080-exec-1] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
+13:58:09.082 [http-nio-8080-exec-2] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
+13:58:14.644 [http-nio-8080-exec-3] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=POST Body={id=4, albumId=0, title='test', url='string', thumbnailUrl='string'}
+13:58:16.981 [http-nio-8080-exec-5] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
+14:03:06.068 [http-nio-8080-exec-10] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
+14:13:46.194 [http-nio-8080-exec-3] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
+14:13:54.978 [http-nio-8080-exec-5] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
+14:14:15.927 [http-nio-8080-exec-7] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=DELETE ObjectId=4
+14:14:18.940 [http-nio-8080-exec-8] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
