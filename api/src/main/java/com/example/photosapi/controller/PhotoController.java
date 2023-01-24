@@ -8,8 +8,6 @@ import com.example.photosapi.util.LogUtil;
 import com.example.photosapi.util.PhotoMapper;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,6 +16,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,6 +35,7 @@ import java.util.List;
         description = "API for managing photos"
 )
 )
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PhotoController {
 
     @Autowired
@@ -52,6 +53,7 @@ public class PhotoController {
 
     public PhotoController() {
     }
+
 
     @GetMapping
     @Operation(summary = "Retrieve all photos",
@@ -77,9 +79,10 @@ public class PhotoController {
         if (!rateLimiter.tryConsume()) {
             return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).build();
         }
+        System.out.println(request.getTitle());
         Photo photo = photoRepository.save(photoMapper.toPhoto(request));
-        simpMessagingTemplate.convertAndSend("/photos/websocket", photo);
-
+        simpMessagingTemplate.convertAndSend("/websocket/photos", photo);
+        System.out.println(request.getTitle());
         logUtil.handleLog(log, servletRequest, photo);
         return ResponseEntity.ok().build();
     }
@@ -103,7 +106,7 @@ public class PhotoController {
 
         Photo newPhoto = photoMapper.toPhoto(request);
         newPhoto.setId(photo_id);
-        simpMessagingTemplate.convertAndSend("/photos/websocket", photoRepository.save(newPhoto));
+        simpMessagingTemplate.convertAndSend("/websocket/photos", photoRepository.save(newPhoto));
 
         logUtil.handleLog(log, servletRequest, oldPhoto, newPhoto);
         return ResponseEntity.ok().build();
@@ -123,9 +126,14 @@ public class PhotoController {
         photo = photo.clone();
 
         photoRepository.deleteById(photo_id);
-        simpMessagingTemplate.convertAndSend("/photos/websocket", photo);
+        simpMessagingTemplate.convertAndSend("/websocket/photos", photo);
 
         logUtil.handleLog(log, servletRequest, photo_id);
         return ResponseEntity.ok().build();
+    }
+
+    @SendTo("/websocket/photos")
+    public Photo broadcastMessage(@Payload Photo photo) {
+        return photo;
     }
 }

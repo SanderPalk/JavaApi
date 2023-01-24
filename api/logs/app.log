@@ -1,23 +1,16 @@
-13:50:30.269 [main] INFO  PhotosApiApplication - Starting PhotosApiApplication using Java 19.0.1 with PID 11204 (C:\Users\Sander\Desktop\photosApi\target\classes started by Sander in C:\Users\Sander\Desktop\photosApi)
-13:50:30.278 [main] INFO  PhotosApiApplication - No active profile set, falling back to 1 default profile: "default"
-13:50:36.214 [main] INFO  PhotosApiApplication - Started PhotosApiApplication in 6.484 seconds (process running for 7.845)
-13:50:46.512 [http-nio-8080-exec-2] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
-13:52:02.176 [http-nio-8080-exec-4] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
-13:52:53.033 [http-nio-8080-exec-7] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=POST Body={id=1, albumId=null, title='null', url='null', thumbnailUrl='null'}
-13:53:05.986 [http-nio-8080-exec-8] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=POST Body={id=2, albumId=0, title='string', url='string', thumbnailUrl='string'}
-13:53:16.470 [http-nio-8080-exec-9] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
-13:54:03.363 [http-nio-8080-exec-1] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=POST Body={id=3, albumId=0, title='test', url='string', thumbnailUrl='string'}
-13:54:06.594 [http-nio-8080-exec-2] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
-13:54:51.892 [http-nio-8080-exec-4] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=DELETE ObjectId=1
-13:55:22.496 [http-nio-8080-exec-6] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=DELETE ObjectId=2
-13:55:26.554 [http-nio-8080-exec-7] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=DELETE ObjectId=3
-13:55:28.536 [http-nio-8080-exec-8] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
-13:58:06.568 [http-nio-8080-exec-1] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
-13:58:09.082 [http-nio-8080-exec-2] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
-13:58:14.644 [http-nio-8080-exec-3] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=POST Body={id=4, albumId=0, title='test', url='string', thumbnailUrl='string'}
-13:58:16.981 [http-nio-8080-exec-5] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
-14:03:06.068 [http-nio-8080-exec-10] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
-14:13:46.194 [http-nio-8080-exec-3] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
-14:13:54.978 [http-nio-8080-exec-5] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
-14:14:15.927 [http-nio-8080-exec-7] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=DELETE ObjectId=4
-14:14:18.940 [http-nio-8080-exec-8] INFO  PhotoController - Session=0AC89CCD5F517FF4F9E2B526481CB498 Method=GET
+20:50:46.978 [main] INFO  PhotosApiApplication - Starting PhotosApiApplication using Java 19.0.1 with PID 17092 (C:\Users\Sander\Desktop\photosApi\target\classes started by Sander in C:\Users\Sander\Desktop\photosApi)
+20:50:46.987 [main] INFO  PhotosApiApplication - No active profile set, falling back to 1 default profile: "default"
+20:50:51.917 [main] INFO  PhotosApiApplication - Started PhotosApiApplication in 5.32 seconds (process running for 6.33)
+20:50:57.862 [http-nio-8080-exec-8] INFO  PhotoController - Session=FF9E84A67B92F1A39D16D76916D760DD Method=GET
+20:50:58.114 [http-nio-8080-exec-3] INFO  PhotoController - Session=6D606D094BC6F2F1AFC95C5F550B845C Method=GET
+20:51:01.354 [http-nio-8080-exec-7] INFO  PhotoController - Session=322ABC763168309EA7884870E2270B17 Method=POST Body={id=1, albumId=null, title='aaaa', url='aaaaaaa', thumbnailUrl='null'}
+21:00:58.720 [http-nio-8080-exec-1] INFO  PhotoController - Session=E7479C06352EC90AF0CAC407F69DDB71 Method=GET
+21:00:58.744 [http-nio-8080-exec-3] INFO  PhotoController - Session=A9BE398E068C51FB2ED1D4D3B7313CA3 Method=GET
+21:00:59.633 [http-nio-8080-exec-10] INFO  PhotoController - Session=3A03633888752BFFCEF5AAACB9C1FE76 Method=GET
+21:00:59.645 [http-nio-8080-exec-9] INFO  PhotoController - Session=700F5E555FB05663BF1BBD59F145E745 Method=GET
+21:02:49.194 [http-nio-8080-exec-1] INFO  PhotoController - Session=CA5B441ABB3B5BB3EC13F397B4E9204D Method=GET
+21:02:49.204 [http-nio-8080-exec-8] INFO  PhotoController - Session=0FF785108EC32960721643E277A2F6A5 Method=GET
+21:02:52.152 [http-nio-8080-exec-5] INFO  PhotoController - Session=5754848A9299037AA8C9B2F5B169D726 Method=GET
+21:02:52.159 [http-nio-8080-exec-2] INFO  PhotoController - Session=96AF63D5385CBC67A546960C8AA6A32A Method=GET
+21:02:52.885 [http-nio-8080-exec-5] INFO  PhotoController - Session=CA7A8AA3B57DDF225E9F063A2104E2E5 Method=GET
+21:02:52.890 [http-nio-8080-exec-2] INFO  PhotoController - Session=BB46A941C8934560EA8C9B806C768721 Method=GET

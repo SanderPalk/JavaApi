@@ -23,12 +23,13 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(HttpMethod.DELETE, "/photos/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/photos/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/photos/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/photos").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
-
+        http.cors();
         return http.build();
     }
 
