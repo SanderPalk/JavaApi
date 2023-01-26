@@ -2,6 +2,8 @@ package com.example.photosapi.model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 public class Photo {
 
@@ -100,7 +102,7 @@ public class Photo {
         StringBuilder sbOld = new StringBuilder();
         StringBuilder sbNew = new StringBuilder();
 
-        if (!this.albumId.equals(newPhoto.getAlbumId())) {
+        if (!Objects.equals(this.albumId, newPhoto.getAlbumId())) {
             sbNew.append("albumId=").append(newPhoto.getAlbumId()).append(", ");
             sbOld.append("albumId=").append(this.getAlbumId()).append(", ");
         };
@@ -112,7 +114,7 @@ public class Photo {
             sbNew.append("url=").append(newPhoto.getUrl()).append(", ");
             sbOld.append("url=").append(this.getUrl()).append(", ");
         };
-        if (!this.thumbnailUrl.equals(newPhoto.getThumbnailUrl())) {
+        if  (!Objects.equals(this.thumbnailUrl, newPhoto.getThumbnailUrl())) {
             sbNew.append("thumbnailUrl=").append(newPhoto.getThumbnailUrl()).append(", ");
             sbOld.append("thumbnailUrl=").append(this.getThumbnailUrl()).append(", ");
         };
@@ -127,11 +129,8 @@ public class Photo {
     @Override
     public String toString() {
         return "{" +
-                "id=" + id +
-                ", albumId=" + albumId +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", url='" + url + '\'' +
-                ", thumbnailUrl='" + thumbnailUrl + '\'' +
                 '}';
     }
 }

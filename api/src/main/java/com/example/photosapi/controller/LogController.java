@@ -37,8 +37,10 @@ public class LogController {
     @Autowired
     private LogConfig logConfig;
     private static final Logger log = LogManager.getLogger(LogController.class);
-    private static final String LOG_REGEX = "^(\\d{2}:\\d{2}:\\d{2}.\\d{3}) \\[.+ INFO.+ - Session=(.+) Method=(.+) Body=(.+)( OldBody=(.+))?$";
+    private static final String LOG_REGEX = "^(\\d{2}:\\d{2}:\\d{2}.\\d{3}) \\[.+ INFO.+ - Session=(.+) Method=(.+) ItemId=(.+) Body=(.+)( OldBody=(.+))?$";
+    private static final String LOG_DELETE_REGEX = "^(\\d{2}:\\d{2}:\\d{2}.\\d{3}) \\[.+ INFO.+ - Session=(.+) Method=(.+) ItemId=(.+) Body=(.+)$";
     private static final Pattern LOG_PATTERN = Pattern.compile(LOG_REGEX);
+    private static final Pattern LOG_DELETE_PATTERN = Pattern.compile(LOG_DELETE_REGEX);
     private final LogUtil logUtil = new LogUtil();
 
     @GetMapping()
@@ -58,12 +60,14 @@ public class LogController {
                 String time = matcher.group(1);
                 String sessionId = matcher.group(2);
                 String method = matcher.group(3);
-                String body = matcher.group(4).replace("'", "");
-                if (method.equals("PUT") || method.equals("POST")) {
+                String itemId = matcher.group(4);
+                String body = matcher.group(5).replace("'", "");
+                if (method.equals("PUT") || method.equals("POST") || method.equals("DELETE")) {
                     Log log = new Log();
                     log.setTime(time);
                     log.setSessionId(sessionId);
                     log.setMethod(method);
+                    log.setItemId(itemId);
                     String[] bodyAndOldBody = body.split(" OldBody=");
                     String bodyValue = bodyAndOldBody[0];
                     String oldBodyValue = null;
@@ -80,6 +84,7 @@ public class LogController {
                     }
                     logs.add(log);
                 }
+
             }
         }
 

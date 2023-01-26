@@ -12,6 +12,9 @@ public class Log {
     @JsonProperty("method")
     private String method;
 
+    @JsonProperty("itemId")
+    private String itemId;
+
     @JsonProperty("body")
     private String body;
 
@@ -41,6 +44,12 @@ public class Log {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public String getItemId() { return itemId; }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
     public String getBody() {

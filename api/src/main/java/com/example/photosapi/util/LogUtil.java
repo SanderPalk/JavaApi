@@ -22,23 +22,25 @@ public class LogUtil {
     public void handleLog(Logger log, HttpServletRequest request, Photo photo) {
         String id = request.getSession().getId();
         String method = request.getMethod();
+        String itemId = String.valueOf(photo.getId());
 
-        log.info("Session={} Method={} Body={}", id, method, photo.toString());
+        log.info("Session={} Method={} ItemId={} Body={}", id, method, itemId, photo.toString());
     }
 
     public void handleLog(Logger log, HttpServletRequest request, Photo oldPhoto, Photo newPhoto) {
         String id = request.getSession().getId();
         String method = request.getMethod();
+        String itemId = String.valueOf(oldPhoto.getId());
         String[] difference = oldPhoto.getDifferences(newPhoto);
 
-        log.info("Session={} Method={} Body={} OldBody={}", id, method, difference[0], difference[1]);
+        log.info("Session={} Method={} ItemId={} Body={} OldBody={}", id, method, itemId, difference[0], difference[1]);
     }
 
-    public void handleLog(Logger log, HttpServletRequest request, int objectId) {
+    public void handleLog(Logger log, HttpServletRequest request, int itemId, Photo photo) {
         String id = request.getSession().getId();
         String method = request.getMethod();
 
-        log.info("Session={} Method={} ObjectId={}", id, method, objectId);
+        log.info("Session={} Method={} ItemId={} Body={}", id, method, itemId, photo.toString());
     }
 
     public List<String> readLogFile(Path path, Logger log) throws FileNotFoundException {

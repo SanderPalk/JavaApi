@@ -9,12 +9,16 @@ import com.example.photosapi.util.PhotoMapper;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -59,8 +63,22 @@ public class PhotoController {
     @Operation(summary = "Retrieve all photos",
             description = "Retrieves a list of all photos in the system",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Successful retrieval of photos"),
-                    @ApiResponse(responseCode = "404", description = "Photos not found")
+                    @ApiResponse(responseCode = "200",
+                            content = @Content(schema =
+                            @Schema(implementation = Photo.class), mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    examples = {@ExampleObject(name = "", value = "{\n" +
+                                            "        \"id\": 1,\n" +
+                                            "        \"title\": \"photoTitle\",\n" +
+                                            "        \"url\": \"www.url.ee\",\n" +
+                                            "        \"thumbnail\": \"thumbnail_placeholder\"\n" +
+                                            "    }")}),
+                            description = "Success Response."),
+                    @ApiResponse(responseCode = "404",
+                            content = @Content(schema =
+                            @Schema(implementation = Photo.class), mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    examples = {@ExampleObject(name = "", value = "[\n" +
+                                            "    ]")}),
+                            description = "Photos not found")
             })
     public ResponseEntity<List<Photo>> getPhotos() {
         logUtil.handleLog(log, servletRequest);
@@ -71,8 +89,26 @@ public class PhotoController {
     @Operation(summary = "Add a new photo",
             description = "Adds a new photo to the system",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Successful addition of photo"),
-                    @ApiResponse(responseCode = "400", description = "Invalid request body")
+                    @ApiResponse(responseCode = "200",
+                            content = @Content(schema =
+                            @Schema(implementation = Photo.class), mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    examples = {@ExampleObject(name = "", value = "{\n" +
+                                            "        \"id\": 1,\n" +
+                                            "        \"title\": \"photoTitle\",\n" +
+                                            "        \"url\": \"www.url.ee\",\n" +
+                                            "        \"thumbnail\": \"thumbnail_placeholder\"\n" +
+                                            "    }")}),
+                            description = "Successful addition of photo"),
+                    @ApiResponse(responseCode = "400",
+                            content = @Content(schema =
+                            @Schema(implementation = Photo.class), mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    examples = {@ExampleObject(name = "", value = "{\n" +
+                                            "        \"(id\": 1),\n" +
+                                            "        \"(title\": \"photoTitle\"),\n" +
+                                            "        \"(url\": \"www.url.ee)\",\n" +
+                                            "        \"(thumbnail\": \"thumbnail_placeholder)\"\n" +
+                                            "    }")}),
+                            description = "Invalid request body")
             })
 
     public ResponseEntity<Type> addPhoto(@RequestBody PhotoDto request) {
@@ -81,7 +117,7 @@ public class PhotoController {
         }
         System.out.println(request.getTitle());
         Photo photo = photoRepository.save(photoMapper.toPhoto(request));
-        simpMessagingTemplate.convertAndSend("/websocket/photos", photo);
+        simpMessagingTemplate.convertAndSend("/photos", List.of("POST", photo));
         System.out.println(request.getTitle());
         logUtil.handleLog(log, servletRequest, photo);
         return ResponseEntity.ok().build();
@@ -91,9 +127,35 @@ public class PhotoController {
     @Operation(summary = "Edit a photo",
             description = "Updates a photo in the system with the given ID",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Successful update of photo"),
-                    @ApiResponse(responseCode = "404", description = "Photo not found"),
-                    @ApiResponse(responseCode = "400", description = "Invalid request body")
+                    @ApiResponse(responseCode = "200",
+                            content = @Content(schema =
+                            @Schema(implementation = Photo.class), mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    examples = {@ExampleObject(name = "", value = "{\n" +
+                                            "        \"(id\": 1),\n" +
+                                            "        \"title\": \"photoTitle\",\n" +
+                                            "        \"url\": \"www.url.ee\",\n" +
+                                            "        \"thumbnail\": \"thumbnail_placeholder\"\n" +
+                                            "    }")}),
+                            description = "Successful update of photo"),
+                    @ApiResponse(responseCode = "404",
+                            content = @Content(schema =
+                            @Schema(implementation = Photo.class), mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    examples = {@ExampleObject(name = "", value = "{\n" +
+                                            "        \"title\": \"photoTitle\",\n" +
+                                            "        \"url\": \"www.url.ee\",\n" +
+                                            "        \"thumbnail\": \"thumbnail_placeholder\"\n" +
+                                            "    }")}),
+                            description = "Photo not found"),
+                    @ApiResponse(responseCode = "400",
+                            content = @Content(schema =
+                            @Schema(implementation = Photo.class), mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    examples = {@ExampleObject(name = "", value = "{\n" +
+                                            "        \"(id\": 1),\n" +
+                                            "        \"(title\": \"photoTitle\"),\n" +
+                                            "        \"(url\": \"www.url.ee)\",\n" +
+                                            "        \"(thumbnail\": \"thumbnail_placeholder)\"\n" +
+                                            "    }")}),
+                            description = "Invalid request body")
             }
     )
 
@@ -106,7 +168,7 @@ public class PhotoController {
 
         Photo newPhoto = photoMapper.toPhoto(request);
         newPhoto.setId(photo_id);
-        simpMessagingTemplate.convertAndSend("/websocket/photos", photoRepository.save(newPhoto));
+        simpMessagingTemplate.convertAndSend("/photos", List.of("PUT", photoRepository.save(newPhoto)));
 
         logUtil.handleLog(log, servletRequest, oldPhoto, newPhoto);
         return ResponseEntity.ok().build();
@@ -116,8 +178,18 @@ public class PhotoController {
     @Operation(summary = "Delete a photo",
             description = "Deletes a photo from the system with the given ID",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Successful deletion of photo"),
-                    @ApiResponse(responseCode = "404", description = "Photo not found"),
+                    @ApiResponse(responseCode = "200",
+                            content = @Content(schema =
+                            @Schema(implementation = Photo.class), mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    examples = {@ExampleObject(name = "", value = "[\n" +
+                                            "    ]")}),
+                            description = "Successful deletion of photo"),
+                    @ApiResponse(responseCode = "404",
+                            content = @Content(schema =
+                            @Schema(implementation = Photo.class), mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    examples = {@ExampleObject(name = "", value = "[\n" +
+                                            "    ]")}),
+                            description = "Photo not found"),
             })
     @Secured("ROLE_ADMIN")
     public ResponseEntity<Type> deletePhoto(@PathVariable int photo_id) {
@@ -126,14 +198,9 @@ public class PhotoController {
         photo = photo.clone();
 
         photoRepository.deleteById(photo_id);
-        simpMessagingTemplate.convertAndSend("/websocket/photos", photo);
+        simpMessagingTemplate.convertAndSend("/photos", List.of("DELETE", photo));
 
-        logUtil.handleLog(log, servletRequest, photo_id);
+        logUtil.handleLog(log, servletRequest, photo_id, photo);
         return ResponseEntity.ok().build();
-    }
-
-    @SendTo("/websocket/photos")
-    public Photo broadcastMessage(@Payload Photo photo) {
-        return photo;
     }
 }
